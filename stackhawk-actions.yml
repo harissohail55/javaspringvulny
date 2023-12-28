@@ -1,5 +1,5 @@
 app:
-  # Update your applicationId. Sample Commit #2
+  # Update your applicationId.
   applicationId: ${APP_ID:0288ae00-9473-4cb9-8871-d8abb390610b}
   env: ${APP_ENV:GitHub Actions}
   host: ${APP_HOST:https://localhost:9000}
@@ -52,7 +52,7 @@ app:
 hawk:
   spider:
     maxDurationMinutes: 5
-  failureThreshold: high
+  failureThreshold: low
 #  config:
 #    - "scanner.analyser.redirectEqualsNotFound=false"
 #    - "scanner.analyser.followRedirect=true"
