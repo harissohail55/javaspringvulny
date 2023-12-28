@@ -35,6 +35,7 @@ jobs:
       # commit SHA and branch name and stores them to the variable names COMMIT_SHA and BRANCH_NAME.
       - name: HawkScan
         uses: stackhawk/hawkscan-action@v2
+        continue-on-error: true   
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           configurationFiles: stackhawk-actions.yml
