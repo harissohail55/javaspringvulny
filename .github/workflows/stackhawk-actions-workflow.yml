@@ -16,9 +16,6 @@ permissions:
 jobs:
   # This is the job of running the Javaspringvulny application and then running HawkScan to test it
   stackhawk-hawkscan:
-    permissions:
-        contents: read # for actions/checkout to fetch code
-        security-events: write # for stackhawk/hawkscan-action to upload code scanning alert info
     # This is the OS we chose to run the project on
     runs-on: ubuntu-latest
     # These are the sequential steps for running the action
@@ -38,9 +35,9 @@ jobs:
         continue-on-error: true   
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: stackhawk-actions.yml
           codeScanningAlerts: true
           githubToken: ${{ github.token }}
+          configurationFiles: stackhawk-actions.yml
         env:
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }} # Get the commit SHA from GitHub -> needed for Actions
           BRANCH_NAME: ${{ github.head_ref }} # Used to display Branch name in the StackHawk UI
