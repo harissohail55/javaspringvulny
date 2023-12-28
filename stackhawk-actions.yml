@@ -52,7 +52,7 @@ app:
 hawk:
   spider:
     maxDurationMinutes: 5
-  failureThreshold: low
+  failureThreshold: medium
 #  config:
 #    - "scanner.analyser.redirectEqualsNotFound=false"
 #    - "scanner.analyser.followRedirect=true"
