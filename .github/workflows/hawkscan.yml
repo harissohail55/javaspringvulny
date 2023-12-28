@@ -2,8 +2,15 @@ name: HawkScan
 on:
   repository_dispatch:
     types: [integration-initial-test]
+
+permissions:
+  contents: read
+
 jobs:
   hawkscan:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for stackhawk/hawkscan-action to upload code scanning alert info
     name: HawkScan
     runs-on: ubuntu-latest
     steps:
@@ -20,9 +27,12 @@ jobs:
         run: cd /home/runner/work/${{ github.event.client_payload.repoName }}/${{ github.event.client_payload.repoName }}
       - name: Run HawkScan
         id: run-hawkscan
-        uses: stackhawk/hawkscan-action@main
+        uses: stackhawk/hawkscan-action@4c3258cd62248dac6d9fe91dd8d45928c697dee0
+        continue-on-error: true
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+          codeScanningAlerts: true
+          githubToken: ${{ github.token }}
           configurationFiles: ${{ github.event.client_payload.configFile }}
           sourceURL: ${{ github.event.client_payload.hawkscanSourceUrl }}
           version: ${{ github.event.client_payload.hawkscanVersion }}
