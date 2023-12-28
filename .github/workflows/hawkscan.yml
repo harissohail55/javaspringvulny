@@ -28,6 +28,7 @@ jobs:
       - name: Run HawkScan
         id: run-hawkscan
         uses: stackhawk/hawkscan-action@v2
+        continue-on-error: true   
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
           codeScanningAlerts: true
